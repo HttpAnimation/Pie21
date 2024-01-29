@@ -21,6 +21,11 @@ To obtain your API key, visit the following URL in your browser (e.g., [Firefox]
 ```HTML
 https://e621.net/users/{replaceWithID}/api_key
 ```
+## Working
+1) Loading photos
+2) Loading videos
+3) Info on posts
+4) Favorite/Unfavorite
 
 ## Credits
 1) [NotMeNotYou](https://e621.net/users/NotMeNotYou) | [e621](https://e621.net) - Creator of [e621](https://e621.net), the source of my affection for boys.
