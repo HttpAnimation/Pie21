@@ -3,6 +3,7 @@ const cors = require('cors');
 const fetch = require('node-fetch');
 const path = require('path');
 const os = require('os');
+const WebSocket = require('ws');
 
 const app = express();
 const port = 9532;
@@ -45,6 +46,34 @@ const server = app.listen(port, host, () => {
   console.log(`Server listening at http://${ip}:${port}`);
   console.log(`Server is also accessible via http://${ip}:${port}`);
   console.log(`Server is also accessible via http://localhost:${port}`);
+});
+
+// WebSocket setup
+const wss = new WebSocket.Server({ noServer: true });
+
+wss.on('connection', (ws) => {
+  // Capture console.log messages and send them to the connected clients
+  const originalLog = console.log;
+  console.log = function (message) {
+    originalLog.apply(console, arguments);
+    ws.send(JSON.stringify({ type: 'log', message }));
+  };
+
+  ws.on('message', (message) => {
+    // You can handle incoming messages from clients here if needed
+  });
+
+  ws.on('close', () => {
+    // Restore the original console.log when the client disconnects
+    console.log = originalLog;
+  });
+});
+
+// Upgrade the HTTP server to a WebSocket server
+server.on('upgrade', (request, socket, head) => {
+  wss.handleUpgrade(request, socket, head, (ws) => {
+    wss.emit('connection', ws, request);
+  });
 });
 
 function getLocalIP() {
