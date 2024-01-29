@@ -88,22 +88,28 @@ function displayPosts(posts) {
 async function favoritePost(postId) {
   try {
     const { username, apiKey } = await fetchApiCredentials();
-    const apiUrl = `https://e621.net/posts/${postId}/fav.json`;
+    const apiUrl = `https://e621.net/favorites.json`;  // Updated URL
 
     const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
         'User-Agent': `Pie21/1.0 (by ${username} on e621)`,
-        'Authorization': 'Basic ' + btoa(`${username}:${apiKey}`)
-      }
+        'Authorization': 'Basic ' + btoa(`${username}:${apiKey}`),
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ post_id: postId }),
     });
 
-    const data = await response.json();
+    if (response.ok) {
+      const data = await response.json();
 
-    if (data.success) {
-      console.log(`Post ${postId} favorited successfully!`);
+      if (data.success) {
+        console.log(`Post ${postId} favorited successfully!`);
+      } else {
+        console.error(`Error favoriting post: ${data.reason}`);
+      }
     } else {
-      console.error(`Error favoriting post: ${data.reason}`);
+      console.error(`Error favoriting post: HTTP status ${response.status}`);
     }
   } catch (error) {
     console.error('Error favoriting post:', error);
