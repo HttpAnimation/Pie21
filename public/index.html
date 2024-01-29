@@ -1,22 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <title>Pie21</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pie21</title>
+    <link rel="stylesheet" href="Scripts/CSS/styles.css">
 </head>
 <body>
-  <div id="app">
-    <header>
-      <h1>Pie21</h1>
-      <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="Search...">
-        <button onclick="searchPosts()">Search</button>
-      </div>
-    </header>
-    <div id="result"></div>
-  </div>
-  <script src="main.js"></script>
+    <div id="sidebar">
+        <center><h3>Pie21</h3></center>
+        <a href="index.html" class="movie-button">Home</a>
+    </div>
+
+    <div id="content">
+        <div id="app">
+            <header>
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Search...">
+                    <button onclick="searchPosts()">Search</button>
+                </div>
+            </header>
+            <div id="result"></div>
+        </div>
+    </div>
+
+    <script src="Scripts/JS/hideSidebar.js"></script>
+    <script src="Scripts/JS/main.js"></script>
 </body>
 </html>
