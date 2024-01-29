@@ -57,5 +57,5 @@ function getLocalIP() {
       }
     }
   }
-  return '127.0.0.1'; // Default to localhost if no suitable IP is found
+  return '127.0.0.1';
 }
