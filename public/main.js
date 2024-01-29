@@ -5,7 +5,7 @@ const apiUrl = 'https://e621.net/posts.json?limit=20';
 async function getRecentPosts() {
   try {
     const { username, apiKey } = await fetchApiCredentials();
-
+    
     const response = await fetch(apiUrl, {
       headers: {
         'User-Agent': `Pie21/1.0 (by ${username} on e621)`,
@@ -45,24 +45,9 @@ function displayPosts(posts) {
   posts.forEach(post => {
     const listItem = document.createElement('li');
 
-    // Check if the file type is an image, video (MP4), or video (WebM)
-    if (post.file.ext === 'mp4' || post.file.ext === 'webm') {
-      // Create a video element for MP4 or WebM files
-      const videoElement = document.createElement('video');
-      videoElement.src = post.file.url;
-      videoElement.controls = true; // Add controls for playback
-      videoElement.setAttribute('width', '100%'); // Adjust width as needed
-
-      // Append video element to the list item
-      listItem.appendChild(videoElement);
-    } else {
-      // Create an image element for other file types
-      const imageElement = document.createElement('img');
-      imageElement.src = post.file.url;
-
-      // Append image element to the list item
-      listItem.appendChild(imageElement);
-    }
+    // Create an image element
+    const imageElement = document.createElement('img');
+    imageElement.src = post.file.url; // Assuming the URL to the image is available in the 'file' object
 
     // Create a div to hold the post information
     const postInfo = document.createElement('div');
@@ -72,12 +57,26 @@ function displayPosts(posts) {
     const sourceButton = document.createElement('button');
     sourceButton.textContent = 'Go to Source';
     sourceButton.onclick = function () {
-      window.open(post.url, '_blank'); // Use post.url instead of post.sources
+      const postId = post.id;
+      window.open(`https://e621.net/posts/${postId}`, '_blank');
     };
 
-    // Append post information and the source button to the list item
+    // Create a button to favorite the post
+    const favoriteButton = document.createElement('button');
+    favoriteButton.textContent = 'Favorite';
+    favoriteButton.onclick = function () {
+      favoritePost(post.id);
+    };
+
+    // Append image, post information, source button, and favorite button to the list item
+    listItem.appendChild(imageElement);
     listItem.appendChild(postInfo);
-    listItem.appendChild(sourceButton);
+
+    const buttonContainer = document.createElement('div');
+    buttonContainer.appendChild(sourceButton);
+    buttonContainer.appendChild(favoriteButton);
+
+    listItem.appendChild(buttonContainer);
 
     // Append the list item to the post list
     postList.appendChild(listItem);
@@ -86,5 +85,31 @@ function displayPosts(posts) {
   resultContainer.appendChild(postList);
 }
 
-// Automatically fetch recent posts when the page loads
+async function favoritePost(postId) {
+  try {
+    const { username, apiKey } = await fetchApiCredentials();
+
+    // Make a request to the e621 API to favorite the post
+    const favoriteUrl = `https://e621.net/posts/${postId}/fav.json`;
+    const response = await fetch(favoriteUrl, {
+      method: 'POST',
+      headers: {
+        'User-Agent': `Pie21/1.0 (by ${username} on e621)`,
+        'Authorization': 'Basic ' + btoa(`${username}:${apiKey}`)
+      }
+    });
+
+    const data = await response.json();
+    console.log('Favorite Response:', data); // Log the response
+    alert('Post favorited successfully!');
+  } catch (error) {
+    console.error('Error favoriting post:', error);
+    alert('Error favoriting post. Please check the console for details.');
+  }
+}
+
+// Run the function when the page is loaded
 document.addEventListener('DOMContentLoaded', getRecentPosts);
+
+// Automatically get recent posts when the page is loaded
+window.addEventListener('load', getRecentPosts);
