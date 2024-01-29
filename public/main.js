@@ -115,6 +115,26 @@ async function favoritePost(postId) {
   }
 }
 
+async function searchPosts() {
+  const searchInput = document.getElementById('searchInput');
+  const query = searchInput.value.trim();
+
+  if (query !== '') {
+    const searchUrl = `https://e621.net/posts.json?limit=20&tags=${encodeURIComponent(query)}`;
+    const response = await fetch(searchUrl, getFetchRequestConfig());
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log('Search Results:', data);
+      displayPosts(data.posts);
+    } else {
+      console.error('Error fetching search results:', response.status);
+    }
+  } else {
+    console.log('Please enter a search query.');
+  }
+}
+
 // Run the function when the page is loaded
 document.addEventListener('DOMContentLoaded', getRecentPosts);
 
