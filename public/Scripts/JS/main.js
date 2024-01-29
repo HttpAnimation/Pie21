@@ -47,8 +47,17 @@ function displayPosts(posts) {
   posts.forEach(post => {
     const listItem = document.createElement('li');
 
-    const imageElement = document.createElement('img');
-    imageElement.src = post.file.url; 
+    // Create a video element for webm posts
+    const mediaElement = post.file.ext === 'webm' ? document.createElement('video') : document.createElement('img');
+    mediaElement.src = post.file.url;
+
+    // For webm videos, add attributes for proper playback
+    if (post.file.ext === 'webm') {
+      mediaElement.controls = true;
+      mediaElement.loop = true;
+      mediaElement.width = '100%'; // Adjust as needed
+      mediaElement.height = 'auto';
+    }
 
     const postInfo = document.createElement('div');
     postInfo.textContent = `Post ID: ${post.id}, Rating: ${post.rating}, Score: ${post.score.total}`;
@@ -81,7 +90,7 @@ function displayPosts(posts) {
       votePost(post.id, 'down');
     };
 
-    listItem.appendChild(imageElement);
+    listItem.appendChild(mediaElement);
     listItem.appendChild(postInfo);
     listItem.appendChild(sourceButton);
     listItem.appendChild(favoriteButton);
