@@ -1,6 +1,6 @@
 // JavaScript to interact with the e621 API
 
-const apiUrl = 'https://e621.net/posts.json?limit=10';
+const apiUrl = 'http://localhost:3000/e621/posts.json?limit=10';
 
 async function getRecentPosts() {
   try {

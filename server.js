@@ -1,4 +1,5 @@
 // Node.js server to serve the API client
+// This is old don't use me use Proxy.js instead
 
 const express = require('express');
 const path = require('path');

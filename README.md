@@ -7,9 +7,18 @@ If you would like to install open a terminal and run the following command if yo
 blah blah blah not here rn UwU :) 
 ```
 
+## Running
+once you are installed run the following command in the place you installed it to
+```bash
+node proxy.js
+```
+
 ## API
 To obtain youre API key head to this URL on you're browser eg. [Firefox](https://www.mozilla.org/en-US/firefox/new/)/[Chrome](https://www.google.com/chrome/).
 #### API be sure to replace {replaceWithID} with said id eg. 1234521
 ```html
 https://e621.net/users/{replaceWithID}/api_key
 ```
+
+## Credits
+1) [FYC-Rewrite V2](https://github.com/HttpAnimation/FYC-Rewrite-V2/tree/Stable)

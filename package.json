@@ -1,0 +1,35 @@
+{
+  "name": "pie21",
+  "version": "1.0.0",
+  "description": "Pie21 is a web client for e621 made in HTML, CSS, JS and json.",
+  "main": "proxy.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HttpAnimation/Pie21.git"
+  },
+  "keywords": [
+    "css",
+    "python",
+    "macos",
+    "linux",
+    "html",
+    "unix",
+    "js",
+    "python3"
+  ],
+  "author": "HttpAnimations",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/HttpAnimation/Pie21/issues"
+  },
+  "homepage": "https://github.com/HttpAnimation/Pie21#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "node-fetch": "^2.6.1"
+  }
+}
