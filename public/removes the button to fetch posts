@@ -9,7 +9,6 @@
 <body>
   <div id="app">
     <h1>e621 API Client</h1>
-    <button onclick="getRecentPosts()">Get Recent Posts</button>
     <div id="result"></div>
   </div>
   <script src="main.js"></script>
