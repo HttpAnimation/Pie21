@@ -47,18 +47,15 @@ function displayPosts(posts) {
   posts.forEach(post => {
     const listItem = document.createElement('li');
 
-    // Create a video element for webm posts
     const mediaElement = post.file.ext === 'webm' ? document.createElement('video') : document.createElement('img');
     mediaElement.src = post.file.url;
 
-    // For webm videos, add attributes for proper playback
     if (post.file.ext === 'webm') {
       mediaElement.controls = true;
       mediaElement.loop = true;
-      mediaElement.width = '100%'; // Adjust as needed
-      mediaElement.height = 'auto';
+      mediaElement.width = '100%'; 
+      mediaElement.height = 'auto'; 
 
-      // Add a source element for the webm video
       const sourceElement = document.createElement('source');
       sourceElement.src = post.file.url;
       sourceElement.type = 'video/webm';
