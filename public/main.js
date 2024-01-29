@@ -57,26 +57,25 @@ function displayPosts(posts) {
     const sourceButton = document.createElement('button');
     sourceButton.textContent = 'Go to Source';
     sourceButton.onclick = function () {
-      const postId = post.id;
-      window.open(`https://e621.net/posts/${postId}`, '_blank');
+      window.open(`https://e621.net/posts/${post.id}`, '_blank');
     };
 
-    // Create a button to favorite the post
+    // Create a button to favorite/unfavorite the post
     const favoriteButton = document.createElement('button');
-    favoriteButton.textContent = 'Favorite';
+    favoriteButton.textContent = post.is_favorited ? 'Unfavorite' : 'Favorite';
     favoriteButton.onclick = function () {
-      favoritePost(post.id);
+      if (post.is_favorited) {
+        unfavoritePost(post.id);
+      } else {
+        favoritePost(post.id);
+      }
     };
 
     // Append image, post information, source button, and favorite button to the list item
     listItem.appendChild(imageElement);
     listItem.appendChild(postInfo);
-
-    const buttonContainer = document.createElement('div');
-    buttonContainer.appendChild(sourceButton);
-    buttonContainer.appendChild(favoriteButton);
-
-    listItem.appendChild(buttonContainer);
+    listItem.appendChild(sourceButton);
+    listItem.appendChild(favoriteButton);
 
     // Append the list item to the post list
     postList.appendChild(listItem);
