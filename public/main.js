@@ -190,7 +190,6 @@ async function unfavoritePost(postId) {
   }
 }
 
-
 async function searchPosts() {
   const searchInput = document.getElementById('searchInput');
   const query = searchInput.value.trim();
