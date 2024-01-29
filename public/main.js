@@ -1,34 +1,6 @@
 // JavaScript to interact with the e621 API
 
 const apiUrl = 'https://e621.net/posts.json?limit=20';
-const updateInterval = 5000; // 5 seconds
-
-async function getRecentPosts() {
-  try {
-    const { username, apiKey } = await fetchApiCredentials();
-
-    async function fetchAndDisplayPosts() {
-      const response = await fetch(apiUrl, {
-        headers: {
-          'User-Agent': `Pie21/1.0 (by ${username} on e621)`,
-          'Authorization': 'Basic ' + btoa(`${username}:${apiKey}`)
-        }
-      });
-
-      const data = await response.json();
-      console.log('API Response:', data); // Log the response
-      displayPosts(data.posts);
-    }
-
-    // Fetch and display posts initially
-    await fetchAndDisplayPosts();
-
-    // Set up interval to update posts every 5 seconds
-    setInterval(fetchAndDisplayPosts, updateInterval);
-  } catch (error) {
-    console.error('Error fetching data:', error);
-  }
-}
 
 async function getRecentPosts() {
   try {
@@ -99,17 +71,63 @@ function displayPosts(posts) {
       }
     };
 
-    // Append image, post information, source button, and favorite button to the list item
+    // Create buttons for upvote and downvote
+    const upvoteButton = document.createElement('button');
+    upvoteButton.textContent = 'Upvote';
+    upvoteButton.onclick = function () {
+      votePost(post.id, 'up');
+    };
+
+    const downvoteButton = document.createElement('button');
+    downvoteButton.textContent = 'Downvote';
+    downvoteButton.onclick = function () {
+      votePost(post.id, 'down');
+    };
+
+    // Append image, post information, source button, favorite button, upvote, and downvote buttons to the list item
     listItem.appendChild(imageElement);
     listItem.appendChild(postInfo);
     listItem.appendChild(sourceButton);
     listItem.appendChild(favoriteButton);
+    listItem.appendChild(upvoteButton);
+    listItem.appendChild(downvoteButton);
 
     // Append the list item to the post list
     postList.appendChild(listItem);
   });
 
   resultContainer.appendChild(postList);
+}
+
+async function votePost(postId, direction) {
+  try {
+    const { username, apiKey } = await fetchApiCredentials();
+    const apiUrl = `https://e621.net/posts/${postId}/votes.json`;  // Updated URL
+
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'User-Agent': `Pie21/1.0 (by ${username} on e621)`,
+        'Authorization': 'Basic ' + btoa(`${username}:${apiKey}`),
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ score: direction }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+
+      if (data.success) {
+        console.log(`Post ${postId} ${direction}voted successfully!`);
+      } else {
+        console.error(`Error ${direction}voting post: ${data.reason}`);
+      }
+    } else {
+      console.error(`Error ${direction}voting post: HTTP status ${response.status}`);
+    }
+  } catch (error) {
+    console.error(`Error ${direction}voting post:`, error);
+  }
 }
 
 async function favoritePost(postId) {
