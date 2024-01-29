@@ -107,7 +107,7 @@ function displayPosts(posts) {
 async function votePost(postId, direction) {
   try {
     const { username, apiKey } = await fetchApiCredentials();
-    const apiUrl = `https://e621.net/posts/${postId}/votes.json`;  // Updated URL
+    const apiUrl = `https://e621.net/posts/${postId}/votes.json`;
 
     const response = await fetch(apiUrl, {
       method: 'POST',
@@ -125,7 +125,7 @@ async function votePost(postId, direction) {
       if (data.success) {
         console.log(`Post ${postId} ${direction}voted successfully!`);
       } else {
-        console.error(`Error ${direction}voting post: ${data.reason}`);
+        console.error(`Error ${direction}voting post: ${data.message}`);
       }
     } else {
       console.error(`Error ${direction}voting post: HTTP status ${response.status}`);
