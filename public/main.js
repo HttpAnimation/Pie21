@@ -44,7 +44,20 @@ function displayPosts(posts) {
   const postList = document.createElement('ul');
   posts.forEach(post => {
     const listItem = document.createElement('li');
-    listItem.textContent = `Post ID: ${post.id}, Rating: ${post.rating}, Score: ${post.score.total}`;
+    
+    // Create an image element
+    const imageElement = document.createElement('img');
+    imageElement.src = post.file.url; // Assuming the URL to the image is available in the 'file' object
+
+    // Create a div to hold the post information
+    const postInfo = document.createElement('div');
+    postInfo.textContent = `Post ID: ${post.id}, Rating: ${post.rating}, Score: ${post.score.total}`;
+
+    // Append image and post information to the list item
+    listItem.appendChild(imageElement);
+    listItem.appendChild(postInfo);
+
+    // Append the list item to the post list
     postList.appendChild(listItem);
   });
 
