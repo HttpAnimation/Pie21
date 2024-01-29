@@ -3,7 +3,7 @@
 const apiUrl = 'https://e621.net/posts.json?limit=20';
 
 function clear() {
-  clear();
+  console.clear();
 }
 
 
