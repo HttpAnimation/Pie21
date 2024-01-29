@@ -71,6 +71,12 @@ function displayPosts(posts) {
       window.open(`https://e621.net/posts/${post.id}`, '_blank');
     };
 
+    const openInNewTabButton = document.createElement('button');
+    openInNewTabButton.textContent = 'Open in New Tab';
+    openInNewTabButton.onclick = function () {
+      window.open(post.file.url, '_blank');
+    };
+
     const favoriteButton = document.createElement('button');
     favoriteButton.textContent = post.is_favorited ? 'Unfavorite' : 'Favorite';
     favoriteButton.onclick = function () {
@@ -96,6 +102,7 @@ function displayPosts(posts) {
     listItem.appendChild(mediaElement);
     listItem.appendChild(postInfo);
     listItem.appendChild(sourceButton);
+    listItem.appendChild(openInNewTabButton);
     listItem.appendChild(favoriteButton);
     listItem.appendChild(upvoteButton);
     listItem.appendChild(downvoteButton);
