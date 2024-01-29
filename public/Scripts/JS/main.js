@@ -57,6 +57,12 @@ function displayPosts(posts) {
       mediaElement.loop = true;
       mediaElement.width = '100%'; // Adjust as needed
       mediaElement.height = 'auto';
+
+      // Add a source element for the webm video
+      const sourceElement = document.createElement('source');
+      sourceElement.src = post.file.url;
+      sourceElement.type = 'video/webm';
+      mediaElement.appendChild(sourceElement);
     }
 
     const postInfo = document.createElement('div');
