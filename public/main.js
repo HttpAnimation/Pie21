@@ -41,17 +41,6 @@ function displayPosts(posts) {
     return;
   }
 
-  function getFetchRequestConfig() {
-    const headers = new Headers();
-    headers.append('Accept', 'application/json');
-  
-    return {
-      method: 'GET',
-      headers: headers,
-    };
-  }
-  
-
   const postList = document.createElement('ul');
   posts.forEach(post => {
     const listItem = document.createElement('li');
