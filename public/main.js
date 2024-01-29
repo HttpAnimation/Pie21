@@ -1,6 +1,6 @@
 // JavaScript to interact with the e621 API
 
-const apiUrl = 'http://localhost:3000/e621/posts.json?limit=10';
+const apiUrl = 'https://e621.net/posts.json?limit=10';
 
 async function getRecentPosts() {
   try {
@@ -14,6 +14,7 @@ async function getRecentPosts() {
     });
 
     const data = await response.json();
+    console.log('API Response:', data); // Log the response
     displayPosts(data.posts);
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -49,3 +50,6 @@ function displayPosts(posts) {
 
   resultContainer.appendChild(postList);
 }
+
+// Run the function when the page is loaded
+document.addEventListener('DOMContentLoaded', getRecentPosts);

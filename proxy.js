@@ -6,7 +6,12 @@ const path = require('path');
 const app = express();
 const port = 9532;
 
-app.use(cors());
+// Allow requests from any origin
+app.use(cors({
+  origin: '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  headers: 'Content-Type',
+}));
 
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
