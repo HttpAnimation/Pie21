@@ -1,6 +1,34 @@
 // JavaScript to interact with the e621 API
 
 const apiUrl = 'https://e621.net/posts.json?limit=20';
+const updateInterval = 5000; // 5 seconds
+
+async function getRecentPosts() {
+  try {
+    const { username, apiKey } = await fetchApiCredentials();
+
+    async function fetchAndDisplayPosts() {
+      const response = await fetch(apiUrl, {
+        headers: {
+          'User-Agent': `Pie21/1.0 (by ${username} on e621)`,
+          'Authorization': 'Basic ' + btoa(`${username}:${apiKey}`)
+        }
+      });
+
+      const data = await response.json();
+      console.log('API Response:', data); // Log the response
+      displayPosts(data.posts);
+    }
+
+    // Fetch and display posts initially
+    await fetchAndDisplayPosts();
+
+    // Set up interval to update posts every 5 seconds
+    setInterval(fetchAndDisplayPosts, updateInterval);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+}
 
 async function getRecentPosts() {
   try {
