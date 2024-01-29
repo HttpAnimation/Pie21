@@ -21,4 +21,6 @@ https://e621.net/users/{replaceWithID}/api_key
 ```
 
 ## Credits
-1) HttpAnimations | [FYC-Rewrite V2](https://github.com/HttpAnimation/FYC-Rewrite-V2/tree/Stable) | gh-pages code used as a template.
+1) [NotMeNotYou](https://e621.net/users/NotMeNotYou) | [e621](https://e621.net) | made e621
+
+2) [HttpAnimations](https://github.com/HttpAnimation) | [FYC-Rewrite V2](https://github.com/HttpAnimation/FYC-Rewrite-V2/tree/Stable) | gh-pages code used as a template.
