@@ -2,9 +2,11 @@ const express = require('express');
 const cors = require('cors');
 const fetch = require('node-fetch');
 const path = require('path');
+const os = require('os');
 
 const app = express();
 const port = 9532;
+const host = '0.0.0.0';
 
 app.use(cors({
   origin: '*',
@@ -22,7 +24,7 @@ app.get('/e621', async (req, res) => {
   try {
     const response = await fetch('https://e621.net' + req.url, {
       headers: {
-        'User-Agent': req.get('User-Agent'), // Pass through the User-Agent header
+        'User-Agent': req.get('User-Agent'),
       },
     });
     const data = await response.json();
@@ -37,6 +39,23 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.listen(port, () => {
-  console.log(`Server listening at http://localhost:${port}`);
+const server = app.listen(port, host, () => {
+  const serverAddress = server.address();
+  const ip = serverAddress.address === '0.0.0.0' ? getLocalIP() : serverAddress.address;
+  console.log(`Server listening at http://${ip}:${port}`);
+  console.log(`Server is also accessible via http://${ip}:${port}`);
+  console.log(`Server is also accessible via http://localhost:${port}`);
 });
+
+function getLocalIP() {
+  const networkInterfaces = os.networkInterfaces();
+  for (const key in networkInterfaces) {
+    const networkInterface = networkInterfaces[key];
+    for (const entry of networkInterface) {
+      if (!entry.internal && entry.family === 'IPv4') {
+        return entry.address;
+      }
+    }
+  }
+  return '127.0.0.1'; // Default to localhost if no suitable IP is found
+}
