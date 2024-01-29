@@ -4,7 +4,6 @@ function clear() {
   console.clear();
 }
 
-
 async function getRecentPosts() {
   try {
     const { username, apiKey } = await fetchApiCredentials();
