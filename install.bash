@@ -1,2 +1,15 @@
-npm install express cors
-npm install node-fetch@2.6.1
+mkdir Pie21
+cd Pie21
+wget https://raw.githubusercontent.com/HttpAnimation/Pie21/main/server.js
+wget https://raw.githubusercontent.com/HttpAnimation/Pie21/main/proxy.js
+wget https://raw.githubusercontent.com/HttpAnimation/Pie21/main/package.json
+wget https://raw.githubusercontent.com/HttpAnimation/Pie21/main/package-lock.json
+wget https://raw.githubusercontent.com/HttpAnimation/Pie21/main/api.json
+wget https://raw.githubusercontent.com/HttpAnimation/Pie21/main/NPM.bash
+mkdir public
+cd public
+wget https://raw.githubusercontent.com/HttpAnimation/Pie21/main/public/index.html
+wget https://raw.githubusercontent.com/HttpAnimation/Pie21/main/public/main.js
+wget https://raw.githubusercontent.com/HttpAnimation/Pie21/main/public/styles.css
+cd ../
+bash NPM.bash
