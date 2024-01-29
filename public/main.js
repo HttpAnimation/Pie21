@@ -161,6 +161,36 @@ async function favoritePost(postId) {
   }
 }
 
+async function unfavoritePost(postId) {
+  try {
+    const { username, apiKey } = await fetchApiCredentials();
+    const apiUrl = `https://e621.net/favorites/${postId}.json`;
+
+    const response = await fetch(apiUrl, {
+      method: 'DELETE',
+      headers: {
+        'User-Agent': `Pie21/1.0 (by ${username} on e621)`,
+        'Authorization': 'Basic ' + btoa(`${username}:${apiKey}`),
+      },
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+
+      if (data.success) {
+        console.log(`Post ${postId} unfavorited successfully!`);
+      } else {
+        console.error(`Error unfavoriting post: ${data.reason}`);
+      }
+    } else {
+      console.error(`Error unfavoriting post: HTTP status ${response.status}`);
+    }
+  } catch (error) {
+    console.error('Error unfavoriting post:', error);
+  }
+}
+
+
 async function searchPosts() {
   const searchInput = document.getElementById('searchInput');
   const query = searchInput.value.trim();
