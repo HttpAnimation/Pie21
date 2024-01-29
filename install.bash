@@ -1,15 +1,4 @@
-mkdir Pie21
+git clone https://github.com/HttpAnimation/Pie21.git
 cd Pie21
-wget https://raw.githubusercontent.com/HttpAnimation/Pie21/main/server.js
-wget https://raw.githubusercontent.com/HttpAnimation/Pie21/main/proxy.js
-wget https://raw.githubusercontent.com/HttpAnimation/Pie21/main/package.json
-wget https://raw.githubusercontent.com/HttpAnimation/Pie21/main/package-lock.json
-wget https://raw.githubusercontent.com/HttpAnimation/Pie21/main/api.json
-wget https://raw.githubusercontent.com/HttpAnimation/Pie21/main/NPM.bash
-mkdir public
-cd public
-wget https://raw.githubusercontent.com/HttpAnimation/Pie21/main/public/index.html
-wget https://raw.githubusercontent.com/HttpAnimation/Pie21/main/public/main.js
-wget https://raw.githubusercontent.com/HttpAnimation/Pie21/main/public/styles.css
-cd ../
+chmod +x NPM.bash
 bash NPM.bash
