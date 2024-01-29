@@ -2,6 +2,11 @@
 
 const apiUrl = 'https://e621.net/posts.json?limit=20';
 
+function clear() {
+  console.clear();
+}
+
+
 async function getRecentPosts() {
   try {
     const { username, apiKey } = await fetchApiCredentials();
