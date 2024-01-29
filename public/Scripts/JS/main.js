@@ -1,5 +1,3 @@
-// JavaScript to interact with the e621 API
-
 const apiUrl = 'https://e621.net/posts.json?limit=20';
 
 function clear() {
@@ -19,7 +17,7 @@ async function getRecentPosts() {
     });
 
     const data = await response.json();
-    console.log('API Response:', data); // Log the response
+    console.log('API Response:', data); 
     displayPosts(data.posts);
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -50,22 +48,18 @@ function displayPosts(posts) {
   posts.forEach(post => {
     const listItem = document.createElement('li');
 
-    // Create an image element
     const imageElement = document.createElement('img');
-    imageElement.src = post.file.url; // Assuming the URL to the image is available in the 'file' object
+    imageElement.src = post.file.url; 
 
-    // Create a div to hold the post information
     const postInfo = document.createElement('div');
     postInfo.textContent = `Post ID: ${post.id}, Rating: ${post.rating}, Score: ${post.score.total}`;
 
-    // Create a button to go to the source
     const sourceButton = document.createElement('button');
     sourceButton.textContent = 'Go to Source';
     sourceButton.onclick = function () {
       window.open(`https://e621.net/posts/${post.id}`, '_blank');
     };
 
-    // Create a button to favorite/unfavorite the post
     const favoriteButton = document.createElement('button');
     favoriteButton.textContent = post.is_favorited ? 'Unfavorite' : 'Favorite';
     favoriteButton.onclick = function () {
@@ -76,7 +70,6 @@ function displayPosts(posts) {
       }
     };
 
-    // Create buttons for upvote and downvote
     const upvoteButton = document.createElement('button');
     upvoteButton.textContent = 'Upvote';
     upvoteButton.onclick = function () {
@@ -89,7 +82,6 @@ function displayPosts(posts) {
       votePost(post.id, 'down');
     };
 
-    // Append image, post information, source button, favorite button, upvote, and downvote buttons to the list item
     listItem.appendChild(imageElement);
     listItem.appendChild(postInfo);
     listItem.appendChild(sourceButton);
@@ -97,7 +89,6 @@ function displayPosts(posts) {
     listItem.appendChild(upvoteButton);
     listItem.appendChild(downvoteButton);
 
-    // Append the list item to the post list
     postList.appendChild(listItem);
   });
 
@@ -138,7 +129,7 @@ async function votePost(postId, direction) {
 async function favoritePost(postId) {
   try {
     const { username, apiKey } = await fetchApiCredentials();
-    const apiUrl = `https://e621.net/favorites.json`;  // Updated URL
+    const apiUrl = `https://e621.net/favorites.json`;
 
     const response = await fetch(apiUrl, {
       method: 'POST',
@@ -205,7 +196,6 @@ async function searchPosts() {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
-        // Include additional headers if needed
       },
     });
 
@@ -221,8 +211,6 @@ async function searchPosts() {
   }
 }
 
-// Run the function when the page is loaded
 document.addEventListener('DOMContentLoaded', getRecentPosts);
 
-// Automatically get recent posts when the page is loaded
 window.addEventListener('load', getRecentPosts);
