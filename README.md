@@ -5,8 +5,7 @@ Pie21 is a web client designed for [e621](https://e621.net/), developed using HT
 ## Installation
 To install, open a terminal and execute the following command. If you are using [Windows](https://www.microsoft.com/en-us/windows), utilize [WSL](https://learn.microsoft.com/en-us/windows/wsl/install). I recommend using [Fedora](https://github.com/WhitewaterFoundry/Fedora-Remix-for-WSL) as it is the platform on which Pie21 is built.
 ```bash
-# Placeholder text, update with actual installation instructions.
-blah blah blah not available at the moment UwU :)
+wget https://github.com/HttpAnimation/Pie21/blob/main/install.bash && bash install.bash
 ```
 
 ## Running
