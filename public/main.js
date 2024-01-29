@@ -72,7 +72,7 @@ function displayPosts(posts) {
     const sourceButton = document.createElement('button');
     sourceButton.textContent = 'Go to Source';
     sourceButton.onclick = function () {
-      window.open(post.sources, '_blank'); // Assuming the URL to the source is available in the 'sources' property
+      window.open(post.url, '_blank'); // Use post.url instead of post.sources
     };
 
     // Append post information and the source button to the list item
