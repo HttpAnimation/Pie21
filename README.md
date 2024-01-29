@@ -18,9 +18,13 @@ node proxy.js
 To obtain your API key, visit the following URL in your browser (e.g., [Firefox](https://www.mozilla.org/en-US/firefox/new/)/[Chrome](https://www.google.com/chrome/)).
 
 #### API - Replace {replaceWithID} with your user ID (e.g., 1234521)
-```HTML
+```
 https://e621.net/users/{replaceWithID}/api_key
 ```
+```
+https://e621.net/users/1234521/api_key
+```
+
 ## Working
 1) Loading photos
 2) Loading videos
