@@ -132,7 +132,13 @@ async function searchPosts() {
 
   if (query !== '') {
     const searchUrl = `https://e621.net/posts.json?limit=20&tags=${encodeURIComponent(query)}`;
-    const response = await fetch(searchUrl, getFetchRequestConfig());
+    const response = await fetch(searchUrl, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        // Include additional headers if needed
+      },
+    });
 
     if (response.ok) {
       const data = await response.json();
